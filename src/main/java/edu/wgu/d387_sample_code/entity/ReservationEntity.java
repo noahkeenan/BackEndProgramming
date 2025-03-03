@@ -38,7 +38,7 @@ public class ReservationEntity {
     public void setId(Long id) {
         this.id = id;
     }
-
+//new branch git commit
     public LocalDate getCheckin() {
         return checkin;
     }
