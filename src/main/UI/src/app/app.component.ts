@@ -70,12 +70,13 @@ export class AppComponent implements OnInit {
   }
 
   getWelcomeMessage(): void {
-    this.httpClient.get(this.baseURL + '/api/welcome', { responseType: 'text' })
+    this.httpClient.get<string[]>(this.baseURL + '/api/welcome', { responseType: 'json' })
       .subscribe(
-        response => this.welcomeMessage = response,
+        response => this.welcomeMessage = response.join(' | '), // Join messages with a separator
         error => console.error('Error fetching welcome message:', error)
       );
   }
+
 }
 
 export interface Roomsearch {
