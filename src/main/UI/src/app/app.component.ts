@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
   currentCheckOutVal!: string;
 
   welcomeMessage: string = '';
+  presentationTime: string = ''; // Added for live presentation time
 
   ngOnInit() {
     this.roomsearch = new FormGroup({
@@ -40,6 +41,9 @@ export class AppComponent implements OnInit {
 
     // Fetch the welcome message when the app starts
     this.getWelcomeMessage();
+
+    // Fetch the live presentation time when the app starts
+    this.getPresentationTime();
   }
 
   onSubmit({ value, valid }: { value: Roomsearch, valid: boolean }) {
@@ -74,6 +78,17 @@ export class AppComponent implements OnInit {
       .subscribe(
         response => this.welcomeMessage = response.join(' | '), // Join messages with a separator
         error => console.error('Error fetching welcome message:', error)
+      );
+  }
+
+  getPresentationTime(): void {
+    this.httpClient.get(this.baseURL + '/convertTime?time=14:30', { responseType: 'text' })
+      .subscribe(
+        response => {
+          console.log('Fetched Presentation Time:', response); // Check if data is received
+          this.presentationTime = response.trim();
+        },
+        error => console.error('Error fetching presentation time:', error)
       );
   }
 
