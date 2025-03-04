@@ -26,9 +26,9 @@ public class DisplayWelcomeMessageController {
             String english = englishMessage.get();
             String french = frenchMessage.get();
 
-            // Ensure they are different before returning
+
             if (english.equals(french)) {
-                french = "Bienvenue à l'hôtel Landon!";  // Fallback French message
+                french = "Bienvenue à l'hôtel Landon!";
             }
 
             return ResponseEntity.ok(new String[]{english, french});
